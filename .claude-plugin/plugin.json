@@ -1,0 +1,50 @@
+{
+  "name": "done-gate",
+  "version": "0.1.0",
+  "description": "Claude cannot say \"done\" while the tests fail: a Stop gate runs your test command after every turn that changed files, and existing test files are locked so they cannot be patched green.",
+  "author": { "name": "Daniil Bystrov", "url": "https://github.com/Jvrd97" },
+  "homepage": "https://github.com/Jvrd97/claude-done-gate",
+  "repository": "https://github.com/Jvrd97/claude-done-gate",
+  "license": "MIT",
+  "keywords": ["mod", "tests", "stop-hook", "quality", "tdd", "guard"],
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "checkCommand": {
+      "type": "string",
+      "title": "Check command",
+      "description": "Shell command the gate runs, e.g. \"npm test && npm run typecheck\". Empty: detect from package.json, pyproject.toml/pytest.ini/setup.cfg, Cargo.toml or go.mod.",
+      "default": ""
+    },
+    "timeoutSeconds": {
+      "type": "number",
+      "title": "Check timeout (seconds)",
+      "description": "How long one check run may take before it counts as failed. At most 600.",
+      "default": 300
+    },
+    "maxRounds": {
+      "type": "number",
+      "title": "Max rounds",
+      "description": "How many times per prompt the gate sends Claude back to fix failing checks before it lets it stop anyway.",
+      "default": 3
+    },
+    "lockTests": {
+      "type": "boolean",
+      "title": "Lock test files",
+      "description": "Deny edits, deletes and moves of existing test files. New test files can still be created.",
+      "default": true
+    },
+    "testGlobs": {
+      "type": "string",
+      "title": "Test file globs",
+      "description": "Comma-separated globs relative to the project root. Empty: **/*.test.*, **/*.spec.*, **/test_*.py, **/*_test.py, **/*_test.go, **/tests/**, **/__tests__/**, **/spec/**.",
+      "default": ""
+    },
+    "gate": {
+      "type": "string",
+      "title": "Done gate",
+      "description": "on runs the checks when Claude stops after changing files; off keeps only the test lock.",
+      "default": "on",
+      "options": ["on", "off"]
+    }
+  }
+}

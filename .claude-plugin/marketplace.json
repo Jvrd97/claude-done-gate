@@ -1,0 +1,15 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "done-gate",
+  "description": "done-gate: Claude cannot say done while the tests fail, and cannot patch the tests green",
+  "owner": { "name": "Daniil Bystrov", "url": "https://github.com/Jvrd97" },
+  "plugins": [
+    {
+      "name": "done-gate",
+      "description": "A Stop gate runs your test command after every turn that changed files and sends Claude back on failure; existing test files are locked.",
+      "source": "./",
+      "category": "development",
+      "homepage": "https://github.com/Jvrd97/claude-done-gate"
+    }
+  ]
+}
